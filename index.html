@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alzyan's Army</title>
+<style>
+:root {
+  --bg: #07090d;
+  --panel: #10141b;
+  --panel2: #151b24;
+  --text: #f3f5f7;
+  --muted: #9ca7b5;
+  --accent: #bfc7d2;
+  --line: rgba(255,255,255,.09);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(190,200,215,.12), transparent 38%),
+    linear-gradient(180deg, #080a0e 0%, #050609 100%);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1120px, 92%); margin: auto; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  backdrop-filter: blur(14px);
+  background: rgba(5,6,9,.72);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .04em; }
+.brand img { width: 38px; height: 38px; object-fit: contain; filter: brightness(1.25); }
+.nav-links { display: flex; gap: 28px; color: var(--muted); font-size: .94rem; }
+.nav-links a:hover { color: white; }
+.hero {
+  min-height: 88vh; display: grid; place-items: center; text-align: center;
+  padding: 120px 0 70px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(210,220,235,.11), transparent 68%);
+  top: 5%; left: 50%; transform: translateX(-50%);
+}
+.logo {
+  width: 155px; height: 155px; object-fit: contain; margin-bottom: 25px;
+  filter: drop-shadow(0 0 28px rgba(220,230,240,.18));
+}
+.eyebrow {
+  color: #b8c2cf; text-transform: uppercase; letter-spacing: .3em;
+  font-size: .76rem; font-weight: 700; margin-bottom: 15px;
+}
+h1 { font-size: clamp(3rem, 8vw, 6.4rem); line-height: .95; letter-spacing: -.055em; }
+.hero p { max-width: 650px; margin: 24px auto 30px; color: var(--muted); font-size: 1.1rem; }
+.buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn {
+  padding: 12px 21px; border-radius: 8px; border: 1px solid var(--line);
+  background: white; color: #08090b; font-weight: 750; transition: .2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,.1); }
+.btn.secondary { background: transparent; color: white; }
+section { padding: 95px 0; border-top: 1px solid var(--line); }
+.section-head { margin-bottom: 38px; }
+.section-head h2 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.04em; }
+.section-head p { color: var(--muted); margin-top: 8px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card {
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+  border: 1px solid var(--line); border-radius: 14px; padding: 28px;
+}
+.card h3 { margin-bottom: 8px; font-size: 1.15rem; }
+.card p { color: var(--muted); font-size: .96rem; }
+.number { font-size: .75rem; color: #8f9baa; letter-spacing: .15em; margin-bottom: 25px; }
+.about {
+  display: grid; grid-template-columns: 1.1fr .9fr; gap: 55px; align-items: center;
+}
+.about-copy p { color: var(--muted); margin-top: 17px; font-size: 1.04rem; }
+.quote {
+  border-left: 2px solid #aeb8c5; padding: 22px 0 22px 25px;
+  font-size: 1.45rem; font-weight: 650;
+}
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 30px; }
+.stat { padding: 20px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); }
+.stat strong { display:block; font-size: 1.6rem; }
+.stat span { color: var(--muted); font-size: .82rem; }
+.cta {
+  text-align:center; padding: 75px 30px; border: 1px solid var(--line);
+  border-radius: 18px; background: radial-gradient(circle at 50% 0%, rgba(210,220,235,.08), transparent 60%);
+}
+.cta h2 { font-size: clamp(2rem,5vw,3.2rem); }
+.cta p { color: var(--muted); margin: 12px auto 25px; max-width: 600px; }
+footer { padding: 35px 0; color: #737d89; font-size: .85rem; }
+footer .container { display:flex; justify-content:space-between; gap:20px; }
+@media (max-width: 800px) {
+  .grid, .about { grid-template-columns: 1fr; }
+  .nav-links { display:none; }
+  .stats { grid-template-columns: 1fr; }
+  footer .container { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><img src="data:image/png;base64,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" alt="Alzyan's Army emblem">ALZYAN'S ARMY</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#values">Values</a>
+      <a href="#join">Join</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+<section class="hero">
+  <div class="container">
+    <img class="logo" src="data:image/png;base64,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" alt="Alzyan's Army emblem">
+    <div class="eyebrow">Discipline • Loyalty • Community</div>
+    <h1>ALZYAN'S<br>ARMY</h1>
+    <p>A community built around teamwork, competition, and the pursuit of something greater. Stand together. Play together. Build something worth remembering.</p>
+    <div class="buttons">
+      <a class="btn" href="#join">Join the Army</a>
+      <a class="btn secondary" href="#about">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about">
+    <div class="about-copy">
+      <div class="eyebrow">Who We Are</div>
+      <h2>A force built on unity.</h2>
+      <p>Alzyan's Army is a community for players and creators who want organized activity, strong teamwork, and a place to make their mark.</p>
+      <p>Whether you're here for competition, events, content, or simply the community, there's a place for you in the ranks.</p>
+    </div>
+    <div class="quote">“Strength doesn't come from standing alone. It comes from knowing who stands beside you.”</div>
+  </div>
+</section>
+
+<section id="values">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The Foundation</div>
+      <h2>What we stand for.</h2>
+      <p>Simple principles. Strong community.</p>
+    </div>
+    <div class="grid">
+      <article class="card"><div class="number">01</div><h3>Loyalty</h3><p>Support your fellow members and contribute to a community where everyone can succeed.</p></article>
+      <article class="card"><div class="number">02</div><h3>Teamwork</h3><p>Coordinate, communicate, and work together toward goals that are bigger than any individual.</p></article>
+      <article class="card"><div class="number">03</div><h3>Respect</h3><p>Compete hard while keeping the community welcoming, fair, and enjoyable for everyone.</p></article>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>ONE</strong><span>Community</span></div>
+      <div class="stat"><strong>ONE</strong><span>Army</span></div>
+      <div class="stat"><strong>ONE</strong><span>Mission</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="container">
+    <div class="cta">
+      <div class="eyebrow">Your next chapter</div>
+      <h2>Ready to join the ranks?</h2>
+      <p>Bring your skills, your ambition, and your willingness to work with others. The Army is waiting.</p>
+      <a class="btn" href="https://discord.gg/TbAhBmXnCr" target="_blank" rel="noopener noreferrer">Enter the Army</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <span>© 2026 Alzyan's Army</span>
+    <span>Built for the community.</span>
+  </div>
+</footer>
+</body>
+</html>
